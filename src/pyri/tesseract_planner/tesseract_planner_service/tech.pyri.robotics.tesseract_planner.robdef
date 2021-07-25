@@ -1,0 +1,36 @@
+service tech.pyri.robotics.tesseract_planner
+
+stdver 0.10
+
+import com.robotraconteur.device
+import com.robotraconteur.geometry
+import com.robotraconteur.action
+import com.robotraconteur.robotics.trajectory
+
+using com.robotraconteur.device.Device
+using com.robotraconteur.device.DeviceInfo
+using com.robotraconteur.geometry.Pose2D
+using com.robotraconteur.geometry.Pose
+using com.robotraconteur.action.ActionStatusCode
+using com.robotraconteur.robotics.trajectory.JointTrajectory
+
+struct PlanMoveResult
+    field ActionStatusCode action_status
+    field JointTrajectory trajectory
+    field varvalue{string} extended
+end
+
+object TesseractPlannerService
+    implements Device
+
+    property DeviceInfo device_info [readonly,nolock]
+
+    function string{list} getf_robot_names()
+    function string{list} getf_robot_joint_names(string robot_name)
+
+    function double[] getf_robot_joint_values(string robot_name)
+    function void setf_robot_joint_values(string robot_name, double[] joint_value)
+
+    function PlanMoveResult{generator} plan_freespace_move(string robot_name, double[] target_joint_value, double speed_perc)
+end
+
