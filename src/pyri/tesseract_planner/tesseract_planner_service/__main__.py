@@ -195,17 +195,18 @@ class TesseractPlannerService_impl:
             trajectory.joint_names = joint_names
             trajectory.waypoints = trajectory_wps
 
+            self._update_viewer(robot_name,tesseract_trajectory)
 
             return PlanMoveResultGenerator(trajectory, self._node)
 
-    def _update_viewer(self, robot_trajectory_name = None, trajectory = None):
-        if robot_trajectory_name is None:
+    def _update_viewer(self, robot_name = None, trajectory = None):
+        if robot_name is None:
             joint_names = list(self._t_env.getActiveJointNames())
             joint_values = self._t_env.getCurrentJointValues().flatten()
 
             self._viewer.update_joint_positions(joint_names, joint_values)
         else:
-            pass
+            self._viewer.update_trajectory(trajectory)
 
 
 class PlanMoveResultGenerator:
