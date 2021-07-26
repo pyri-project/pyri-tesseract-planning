@@ -24,7 +24,7 @@ setup(
     },
     entry_points = {
         'pyri.plugins.sandbox_functions': ['pyri-tesseract-planner-sandbox-functions=pyri.tesseract_planner.sandbox_functions:get_sandbox_functions_factory'],
-        #'pyri.plugins.blockly': ['pyri-robotics-plugin-blockly=pyri.robotics.blockly:get_blockly_factory'],
+        'pyri.plugins.blockly': ['pyri-tesseract-planner-plugin-blockly=pyri.tesseract_planner.blockly:get_blockly_factory'],
         'console_scripts': ['pyri-tesseract-planner-service = pyri.tesseract_planner.tesseract_planner_service.__main__:main'],
         #'pyri.plugins.service_node_launch': ['pyri-robotics-launch = pyri.robotics.service_node_launch:get_service_node_launch_factory']
     }
