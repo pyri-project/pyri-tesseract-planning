@@ -23,8 +23,7 @@ setup(
         'test': ['pytest','pytest-asyncio']
     },
     entry_points = {
-        #'pyri.plugins.sandbox_functions': ['pyri-robotics-sandbox-functions=pyri.robotics.sandbox_functions:get_sandbox_functions_factory'],
-        'pyri.plugins.device_type_adapter': ['pyri-robotics-type-adapter = pyri.tesseract_planner.device_type_adapter:get_device_type_adapter_factory'],
+        'pyri.plugins.sandbox_functions': ['pyri-tesseract-planner-sandbox-functions=pyri.tesseract_planner.sandbox_functions:get_sandbox_functions_factory'],
         #'pyri.plugins.blockly': ['pyri-robotics-plugin-blockly=pyri.robotics.blockly:get_blockly_factory'],
         'console_scripts': ['pyri-tesseract-planner-service = pyri.tesseract_planner.tesseract_planner_service.__main__:main'],
         #'pyri.plugins.service_node_launch': ['pyri-robotics-launch = pyri.robotics.service_node_launch:get_service_node_launch_factory']
