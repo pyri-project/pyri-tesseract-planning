@@ -20,6 +20,8 @@ import os
 import re
 import traceback
 
+import importlib.metadata
+
 from pyri.util.service_setup import PyriServiceNodeSetup
 
 from tesseract_robotics.tesseract_common import FilesystemPath, Isometry3d, Translation3d, Quaterniond, \
@@ -285,6 +287,9 @@ def main():
     parser.add_argument("--urdf-file", type=argparse.FileType('r'),default=None,required=True,help="URDF file for scene (required)")
     parser.add_argument("--srdf-file", type=argparse.FileType('r'),default=None,required=True,help="SRDF file for scene (required)")
     parser.add_argument("--viewer-http-port",type=int,default=8001,help="HTTP TCP/IP Listen Port for Tesseract viewer(default 8001)")
+    # Add version here so it doesn't raise an error...
+    version1 = importlib.metadata.version('pyri-tesseract-planner')
+    parser.add_argument('-V', '--version', action='version', version=f'%(prog)s {version1}')
     args, _ = parser.parse_known_args()
 
     with args.urdf_file:
@@ -306,7 +311,8 @@ def main():
     with PyriServiceNodeSetup("tech.pyri.robotics.tesseract_planner", 55923, \
         extra_service_defs=[(__package__,'tech.pyri.robotics.tesseract_planner.robdef')], \
         default_info = (__package__,"pyri_tesseract_planner_service_default_info.yml"), \
-        display_description="PyRI Robotics Tesseract Motion Planner Service", no_device_manager=True) as service_node_setup:
+        display_description="PyRI Robotics Tesseract Motion Planner Service", no_device_manager=True, \
+        ) as service_node_setup:
         
         planner_inst = TesseractPlannerService_impl(device_info=service_node_setup.device_info_struct, t_env=t_env, viewer=viewer, node = RRN)
         
